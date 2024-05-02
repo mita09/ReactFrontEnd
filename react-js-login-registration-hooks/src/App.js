@@ -19,8 +19,7 @@ import { Testimonials } from "./components/testimonials"
 import { Team } from "./components/Team"
 import { Contact } from "./components/contact"
 import { Dashboard } from "./components/Dashboard";
-import { AdminDashBoard } from "./components/AdminDashBoard";
-
+import { UserDashBoard } from "./components/UserDashBoard";
 
 const App = () => {
  const [landingPageData, setLandingPageData] = useState({});
@@ -114,7 +113,7 @@ const App = () => {
       <div className="mt-3">
         <Routes>
           <Route path={"/"} element={<Home />} />
-          <Route path={"/adminDashboard"} element={<AdminDashBoard data={landingPageData.cards}/>} />
+          <Route path={"/UserDashBoard"} element={<UserDashBoard data={landingPageData.cards}/>} />
           <Route path={"/home"} element={<Home />} />
           <Route path={"/dashboard"} element={<Dashboard data={landingPageData.Gallery}/>} />
           <Route path="/login" element={<Login />} />

@@ -13,7 +13,7 @@ export const Gallery = (props) => {
           </p>
         </div>
         <div className="row">
-          <div className="portfolio-items">
+          <div className="row portfolio-items">
             {props.data
               ? props.data.map((d, i) => (
                   <div

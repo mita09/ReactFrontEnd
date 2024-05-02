@@ -608,3 +608,17 @@ label {
   display: contents;
     align-items: center;
 }
+ /* Custom styles */
+ .navbar-custom {
+  background-color: #5e72e4!important /* Dark blue */
+}
+.navbar-custom .navbar-brand,
+.navbar-custom .navbar-text {
+  color: #ffffff; /* White */
+}
+.navbar-custom .nav-item {
+  margin-right: 10px;
+}
+.navbar-custom .nav-link {
+  color: #ffffff !important; /* White */
+}
