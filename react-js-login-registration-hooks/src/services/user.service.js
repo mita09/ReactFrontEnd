@@ -16,8 +16,7 @@ const getModeratorBoard = () => {
 
 const getAdminBoard = () => {
   const jsonObject = JSON.parse(localStorage.getItem("user"));
-  alert("Token : "+jsonObject.token);
-  return axios.post(API_URL + 'admin', {}, {
+  return axios.get(API_URL + 'admin', {
     headers: {
       'Authorization': `Bearer ${jsonObject.token}`
     }

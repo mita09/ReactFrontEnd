@@ -9,7 +9,7 @@ export const Dashboard = (props) => {
           <h2>Dashboard</h2>
          </div>
         <div className="row">
-          <div className="portfolio-items">
+          <div className="row portfolio-items">
             {props.data
               ? props.data.map((d, i) => (
                   <div
