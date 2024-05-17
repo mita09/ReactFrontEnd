@@ -66,72 +66,83 @@ const AddProduct = () => {
 
   return (
     <div className="container">
-      <h2>Add New Product</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="productName">Product Name</label>
-          <input
-            type="text"
-            className="form-control"
-            id="productName"
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-            required
-          />
-          {errors.productName && <div className="text-danger">{errors.productName}</div>}
+      <div className="row justify-content-center">
+        <div className="col-md-8">
+          <div className="card mt-5">
+            <div className="card-header text-white">
+              <h2 className="text-center">Add New Product</h2>
+            </div>
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="productName">Product Name</label>
+                  <input
+                    type="text"
+                    className={`form-control ${errors.productName ? 'is-invalid' : ''}`}
+                    id="productName"
+                    value={productName}
+                    onChange={(e) => setProductName(e.target.value)}
+                    required
+                  />
+                  {errors.productName && <div className="invalid-feedback">{errors.productName}</div>}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="productDescription">Product Description</label>
+                  <textarea
+                    className={`form-control ${errors.productDescription ? 'is-invalid' : ''}`}
+                    id="productDescription"
+                    value={productDescription}
+                    onChange={(e) => setProductDescription(e.target.value)}
+                    required
+                  ></textarea>
+                  {errors.productDescription && <div className="invalid-feedback">{errors.productDescription}</div>}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="productPrice">Product Price</label>
+                  <input
+                    type="number"
+                    className={`form-control ${errors.productPrice ? 'is-invalid' : ''}`}
+                    id="productPrice"
+                    value={productPrice}
+                    onChange={(e) => setProductPrice(e.target.value)}
+                    required
+                  />
+                  {errors.productPrice && <div className="invalid-feedback">{errors.productPrice}</div>}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="productCategory">Product Category</label>
+                  <select
+                    className={`form-control ${errors.productCategory ? 'is-invalid' : ''}`}
+                    id="productCategory"
+                    value={productCategory}
+                    onChange={(e) => setProductCategory(e.target.value)}
+                    required
+                  >
+                    <option value="" disabled>
+                      -- Select a category --
+                    </option>
+                    {categoryOptions.map((category) => (
+                      <option key={category.categoryId} value={category.name}>
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.productCategory && <div className="invalid-feedback">{errors.productCategory}</div>}
+                </div>
+                <button type="submit" className="btn btn-primary btn-block">
+                  Add Product
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="productDescription">Product Description</label>
-          <textarea
-            className="form-control"
-            id="productDescription"
-            value={productDescription}
-            onChange={(e) => setProductDescription(e.target.value)}
-            required
-          ></textarea>
-          {errors.productDescription && <div className="text-danger">{errors.productDescription}</div>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="productPrice">Product Price</label>
-          <input
-            type="number"
-            className="form-control"
-            id="productPrice"
-            value={productPrice}
-            onChange={(e) => setProductPrice(e.target.value)}
-            required
-          />
-          {errors.productPrice && <div className="text-danger">{errors.productPrice}</div>}
-        </div>
-        <div className="form-group">
-          <label htmlFor="productCategory">Product Category</label>
-          <select
-            className="form-control"
-            id="productCategory"
-            value={productCategory}
-            onChange={(e) => setProductCategory(e.target.value)}
-            required
-          >
-            <option value="" disabled>
-              -- Select a category --
-            </option>
-            {categoryOptions.map((category) => (
-              <option key={category.categoryId} value={category.name}>
-                {category.name}
-              </option>
-            ))}
-          </select>
-          {errors.productCategory && <div className="text-danger">{errors.productCategory}</div>}
-        </div>
-        <button type="submit" className="btn btn-primary">
-          Add Product
-        </button>
-      </form>
+      </div>
     </div>
   );
 };
 
 export default AddProduct;
+
 
 
 
