@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service"; // Assuming you have a service for product operations
+import './../customCss/AdminDashBoard.css';
 
 const AddProduct = () => {
   const [productName, setProductName] = useState("");
