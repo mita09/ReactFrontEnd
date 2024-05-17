@@ -21,7 +21,7 @@ const getAdminBoard = () => {
       'Authorization': `Bearer ${jsonObject.token}`
     }
   });
-  // return axios.get(API_URL + "admin");
+  // return axios.get(API_URsL + "admin");
 };
 
 const UserService = {

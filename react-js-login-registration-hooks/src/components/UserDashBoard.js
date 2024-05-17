@@ -54,7 +54,10 @@ useEffect(() => {
                       {d.name} {/* Access title property of each data object */}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    {d.price}
+                     Price :{d.price}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                     Category : {d.category.name}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
