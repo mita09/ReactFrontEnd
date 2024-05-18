@@ -11,8 +11,19 @@ const getAllCat = () => {
   }); 
   // return axios.get(API_URL + "admin")  ss;
 };
+
+const saveCategory = (categoryData) => {
+  const jsonObject = JSON.parse(localStorage.getItem("user"));
+  return axios.post(API_URL + "save", categoryData, {
+    headers: {
+      'Authorization': `Bearer ${jsonObject.token}`,
+      'Content-Type': 'application/json'
+    }
+  });
+};
 const CategoryService = {
-  getAllCat
+  getAllCat,
+  saveCategory
 }
 
 export default CategoryService;

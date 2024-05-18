@@ -2,14 +2,21 @@ import React, { useState, useEffect } from "react";
 import CategoryService from "../services/category.service";
 import ProductService from "../services/product.service"; // Assuming you have a service for product operations
 import './../customCss/AdminDashBoard.css';
-
+import Modal from './Modal';
+import AddCategory from './AddCategory';
 const AddProduct = () => {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [productPrice, setProductPrice] = useState("");
   const [productCategory, setProductCategory] = useState("");
   const [categoryOptions, setCategoryOptions] = useState([]);
+  const [imageFile, setImageFile] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(""); // Success message state
+
   const [errors, setErrors] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
     CategoryService.getAllCat().then(
@@ -36,6 +43,10 @@ const AddProduct = () => {
     return errors;
   };
 
+  const handleFileChange = (e) => {
+    setImageFile(e.target.files[0]);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const errors = validateForm();
@@ -43,21 +54,34 @@ const AddProduct = () => {
       setErrors(errors);
       return;
     }
-    const newProduct = {
-      name: productName,
-      description: productDescription,
-      price: parseFloat(productPrice),
-      category: productCategory,
-    };
-    ProductService.addProduct(newProduct).then(
+    // Create a FormData object
+    const formData = new FormData();
+    
+    // Append the product details
+    formData.append('name', productName);
+    formData.append('price', productPrice);
+    formData.append('isAvailable', true);
+    formData.append('category_id', productCategory);
+    
+    // Append the image file if it exists
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+  
+    ProductService.addProduct(formData).then(
       (response) => {
-        console.log("Product added successfully:", response.data);
+        setSuccessMessage("Product added successfully!"); // Set success message
         // Reset form fields
         setProductName("");
         setProductDescription("");
         setProductPrice("");
         setProductCategory("");
         setErrors({});
+        
+        setTimeout(() => {
+          setSuccessMessage("");
+        }, 3000);
+
       },
       (error) => {
         console.error("Failed to add product:", error);
@@ -67,6 +91,12 @@ const AddProduct = () => {
 
   return (
     <div className="container">
+       {successMessage && (
+          <div className="alert alert-success" role="alert">
+            {successMessage}
+          </div>
+        )}
+        <AddCategory></AddCategory>
       <div className="row justify-content-center">
         <div className="col-md-8">
           <div className="card mt-5">
@@ -123,12 +153,21 @@ const AddProduct = () => {
                       -- Select a category --
                     </option>
                     {categoryOptions.map((category) => (
-                      <option key={category.categoryId} value={category.name}>
+                      <option key={category.categoryId} value={category.categoryId}>
                         {category.name}
                       </option>
                     ))}
                   </select>
                   {errors.productCategory && <div className="invalid-feedback">{errors.productCategory}</div>}
+                </div>
+                <div className="form-group">
+                <label htmlFor="productImage">Product Image</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  id="productImage"
+                  onChange={handleFileChange}
+                />
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">
                   Add Product
@@ -138,6 +177,15 @@ const AddProduct = () => {
           </div>
         </div>
       </div>
+
+      <button type="" onClick={openModal} className="btn btn-primary btn-block">
+        Add Product - Add form inside later
+      </button>
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <div className="row justify-content-center">
+        Add form here later
+      </div>
+      </Modal>
     </div>
   );
 };
