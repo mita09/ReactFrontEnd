@@ -110,7 +110,7 @@ const App = () => {
       <Contact data={landingPageData.Contact} /> */}
 
       <Navigation />
-      <div className="mt-3">
+      <div className="">
         <Routes>
           <Route path={"/"} element={<Home />} />
           <Route path={"/UserDashBoard"} element={<UserDashBoard data={landingPageData.cards}/>} />
